@@ -1,36 +1,5 @@
 services:
   # -------------------------------------------------------------------
-  # Service PHP + MySQL (version "production")
-  # -------------------------------------------------------------------
-  web:
-    build: ./app/php
-    container_name: gestion-produits-php
-    ports:
-      - "8080:80"
-    volumes:
-      - ./app/php/www:/var/www/html
-    depends_on:
-      - db
-    environment:
-      MYSQL_HOST: db
-      MYSQL_DATABASE: gestion_produits
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: password
-
-  db:
-    image: mysql:8.4
-    container_name: gestion-produits-mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: gestion_produits
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: password
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./app/database/gestion_produits.sql:/docker-entrypoint-initdb.d/gestion_produits.sql
-
-  # -------------------------------------------------------------------
   # Service PHP + PostgreSQL (version "développement")
   # -------------------------------------------------------------------
   web-postgres:
@@ -63,4 +32,3 @@ services:
 
 volumes:
   db_data:
-  pg_data:
