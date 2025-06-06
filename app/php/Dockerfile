@@ -1,12 +1,7 @@
 FROM php:8.2-apache
-
+# Installer les extensions pour PostgreSQL
 RUN docker-php-ext-install mysqli pdo pdo_mysql
-
-RUN a2enmod rewrite
-
+# Copier les fichiers de l'app vers /var/www/html
 COPY ./www /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
-
-EXPOSE 80
+# Donner accès en lecture/écriture au dossier uploads
+RUN chmod -R 777 /var/www/html/uploads
