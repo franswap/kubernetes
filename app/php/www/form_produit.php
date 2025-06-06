@@ -20,10 +20,10 @@
     } else {
         $action = "ajout";
         $produit = array(
-            'PRO_id' => '',
-            'PRO_lib' => '',
-            'PRO_description' => '',
-            'PRO_prix' => 0
+            'pro_id' => '',
+            'pro_lib' => '',
+            'pro_description' => '',
+            'pro_prix' => 0
         );
     }
 
@@ -48,29 +48,29 @@
             <?php
                 if ($action == 'modification') {
             ?>
-            <input type="hidden" id="PRO_id" name="PRO_id" value="<?php echo $PRO_id ?>" >
+            <input type="hidden" id="pro_id" name="pro_id" value="<?php echo $PRO_id ?>" >
             <?php
                 }
             ?>
 
 
             <div class="form-group">
-                <label for="PRO_lib">Libellé</label>
-                <input type="text" class="form-control" id="PRO_lib" name="PRO_lib" value="<?php echo $produit['PRO_lib'] ?>" required>
+                <label for="pro_lib">Libellé</label>
+                <input type="text" class="form-control" id="pro_lib" name="pro_lib" value="<?php echo $produit['pro_lib'] ?>" required>
             </div>
 
             <div class="form-group">
-                <label for="PRO_description">Description</label>
-                <textarea class="form-control" id="PRO_description" name="PRO_description" rows="10"><?php echo $produit['PRO_description'] ?></textarea>
+                <label for="pro_description">Description</label>
+                <textarea class="form-control" id="pro_description" name="pro_description" rows="10"><?php echo $produit['pro_description'] ?></textarea>
             </div>
 
             <div class="form-group">
-                <label for="PRO_prix">Prix (€)</label>
-                <input type="number" class="form-control text-right" id="PRO_prix" name="PRO_prix" value="<?php echo $produit['PRO_prix'] ?>" step="0.01" min="0" required>
+                <label for="pro_prix">Prix (€)</label>
+                <input type="number" class="form-control text-right" id="pro_prix" name="pro_prix" value="<?php echo $produit['pro_prix'] ?>" step="0.01" min="0" required>
             </div>
 
             <div class="form-group">
-                <label for="PRO_ressources">Ressources (images)</label>
+                <label for="pro_ressources">Ressources (images)</label>
 
                 <?php
                     if ($action == 'modification') {
@@ -81,10 +81,10 @@
                         if ($res != false) {
                             echo "<div>";
                             while ($ressource = $res->fetch(PDO::FETCH_ASSOC)) {
-                                if ($ressource['RE_type'] == 'img') {
+                                if ($ressource['re_type'] == 'img') {
                                     echo '<div class="img">';
-                                    echo '<img src="'.$ressource['RE_url'].'" class="img-thumbnail thumb" data-id="'.$ressource['RE_id'].'">';
-                                    echo '<img src="img/trash.svg" class="icon trash" data-id="'.$ressource['RE_id'].'">';
+                                    echo '<img src="'.$ressource['re_url'].'" class="img-thumbnail thumb" data-id="'.$ressource['re_id'].'">';
+                                    echo '<img src="img/trash.svg" class="icon trash" data-id="'.$ressource['re_id'].'">';
                                     echo '</div>';
                                 }
                             }
@@ -93,7 +93,7 @@
                     }
                 ?>
 
-                <input type="file" id="PRO_ressources" name="PRO_ressources[]" multiple class="form-control" accept="image/png, image/jpeg">
+                <input type="file" id="pro_ressources" name="pro_ressources[]" multiple class="form-control" accept="image/png, image/jpeg">
             </div>
 
             <div class="form-group" style="margin-top: 20px;">
