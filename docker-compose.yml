@@ -30,37 +30,5 @@ services:
       - db_data:/var/lib/mysql
       - ./app/database/gestion_produits.sql:/docker-entrypoint-initdb.d/gestion_produits.sql
 
-  # -------------------------------------------------------------------
-  # Service PHP + PostgreSQL (version "développement")
-  # -------------------------------------------------------------------
-  web-postgres:
-    build: ./app/php_pg
-    container_name: gestion-produits-php-pg
-    depends_on:
-      - db-postgres
-    ports:
-      - "8081:80"
-    volumes:
-      - ./app/php_pg/www:/var/www/html
-    environment:
-      PG_HOST: db-postgres
-      PG_DATABASE: gestion_produits_pg
-      PG_USER: pguser
-      PG_PASSWORD: pgpassword
-
-  db-postgres:
-    image: postgres:15
-    container_name: gestion-produits-pg
-    restart: always
-    environment:
-      POSTGRES_ROOT_PASSWORD: root
-      POSTGRES_DB: gestion_produits_pg
-      POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pgpassword
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-      - ./app/database/init_postgres.sql:/docker-entrypoint-initdb.d/init_postgres.sql
-
 volumes:
   db_data:
-  pg_data:
