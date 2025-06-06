@@ -31,4 +31,4 @@ services:
       - ./app/database/init_postgres.sql:/docker-entrypoint-initdb.d/init_postgres.sql
 
 volumes:
-  db_data:
+  pg_data:
