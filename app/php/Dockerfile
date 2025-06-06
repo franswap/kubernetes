@@ -5,3 +5,4 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 COPY ./www /var/www/html
 # Donner accès en lecture/écriture au dossier uploads
 RUN chmod -R 777 /var/www/html/uploads
+
