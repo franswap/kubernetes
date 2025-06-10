@@ -1,32 +1,41 @@
-# -------------------------------------------------------------------
-# App PHP + MySQL (version "production")
-# -------------------------------------------------------------------
-
 services:
   web:
-    build: ./app/php
+    build: ./php
     container_name: gestion-produits-web
     ports:
       - "80:80"
     depends_on:
-      - db
+      - mysql-db
+      - postgres-db
     volumes:
-      - ./app/php/www:/var/www/html
+      - ./php/www:/var/www/html
     env_file:
       - .env
 
-  db:
+  mysql-db:
     image: mysql:8.4
     container_name: gestion-produits-mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ${DB_NAME}
-      MYSQL_USER: ${DB_USER}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - db_data_mysql:/var/lib/mysql
-      - ./app/database/gestion_produits.sql:/docker-entrypoint-initdb.d/gestion_produits.sql
+      - mysql_data:/var/lib/mysql
+      - ./database/gestion_produits_my.sql:/docker-entrypoint-initdb.d/gestion_produits.sql
 
+  postgres-db:
+    image: postgres:15
+    container_name: gestion-produits-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${PG_DATABASE}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/gestion_produits_pg.sql:/docker-entrypoint-initdb.d/gestion_produits.sql
 volumes:
-  db_data_mysql:
+  mysql_data:
+  postgres_data:
