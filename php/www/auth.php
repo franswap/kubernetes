@@ -1,16 +1,16 @@
 <?php
-    if (isset($_POST['US_login']) and isset($_POST['US_password'])) {
+    if (isset($_POST['us_login']) and isset($_POST['us_password'])) {
         session_start();
         include 'connect.php';
 
         ini_set('display_errors', '1');
 
         // Hachage du mot de passe avec SHA-256
-        $hashedPassword = hash('sha256', $_POST['US_password']);
+        $hashedPassword = hash('sha256', $_POST['us_password']);
 
-        $sql = "SELECT * FROM utilisateurs WHERE US_login = ? AND US_password = ?";
+        $sql = "SELECT * FROM utilisateurs WHERE us_login = ? AND us_password = ?";
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(1, $_POST['US_login']);
+        $stmt->bindParam(1, $_POST['us_login']);
         $stmt->bindParam(2, $hashedPassword);
         $stmt->execute();
         $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@
             if ( count($res) > 0) {
                 // Utilisateur trouvé dans la base
                 $utilisateur = $res[0];
-                $_SESSION['login'] = $utilisateur['US_login'];
+                $_SESSION['login'] = $utilisateur['us_login'];
                 header("Location: home.php");
             } else {
                 header("Location: index.php");

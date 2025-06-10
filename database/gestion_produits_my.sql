@@ -31,11 +31,11 @@ DROP TABLE IF EXISTS `produits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `produits` (
-  `PRO_id` int(11) NOT NULL AUTO_INCREMENT,
-  `PRO_lib` varchar(200) NOT NULL,
-  `PRO_prix` decimal(10,2) NOT NULL,
-  `PRO_description` text,
-  PRIMARY KEY (`PRO_id`)
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_lib` varchar(200) NOT NULL,
+  `pro_prix` decimal(10,2) NOT NULL,
+  `pro_description` text,
+  PRIMARY KEY (`pro_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,14 +57,14 @@ DROP TABLE IF EXISTS `ressources`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ressources` (
-  `RE_id` int(11) NOT NULL AUTO_INCREMENT,
-  `RE_type` varchar(100) NOT NULL,
-  `RE_url` varchar(1000) NOT NULL,
-  `RE_nom` varchar(100) DEFAULT NULL,
-  `PRO_id` int(11) NOT NULL,
-  PRIMARY KEY (`RE_id`),
-  KEY `ressources_produits_FK` (`PRO_id`),
-  CONSTRAINT `ressources_produits_FK` FOREIGN KEY (`PRO_id`) REFERENCES `produits` (`PRO_id`)
+  `re_id` int(11) NOT NULL AUTO_INCREMENT,
+  `re_type` varchar(100) NOT NULL,
+  `re_url` varchar(1000) NOT NULL,
+  `re_nom` varchar(100) DEFAULT NULL,
+  `pro_id` int(11) NOT NULL,
+  PRIMARY KEY (`re_id`),
+  KEY `ressources_produits_FK` (`pro_id`),
+  CONSTRAINT `ressources_produits_FK` FOREIGN KEY (`pro_id`) REFERENCES `produits` (`pro_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -86,11 +86,11 @@ DROP TABLE IF EXISTS `utilisateurs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `utilisateurs` (
-  `US_id` int(11) NOT NULL AUTO_INCREMENT,
-  `US_login` varchar(100) NOT NULL,
-  `US_password` varchar(100) NOT NULL,
-  PRIMARY KEY (`US_id`),
-  UNIQUE KEY `US_login` (`US_login`)
+  `us_id` int(11) NOT NULL AUTO_INCREMENT,
+  `us_login` varchar(100) NOT NULL,
+  `us_password` varchar(100) NOT NULL,
+  PRIMARY KEY (`us_id`),
+  UNIQUE KEY `us_login` (`us_login`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
