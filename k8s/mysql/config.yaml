@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: gestion-produits
+data:
+  DB_TYPE: "mysql"
+  MYSQL_HOST: "mysql"
+  MYSQL_PORT: "3306"
+  MYSQL_DATABASE: "gestion_produits"
+  MYSQL_USER: "myuser"

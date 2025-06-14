@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: gestion-produits
+data:
+  DB_TYPE: "postgres"
+  PG_HOST: "postgres"
+  PG_PORT: "5432"
+  PG_DATABASE: "gestion_produits"
+  PG_USER: "pguser"

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-postgres
+  namespace: gestion-produits
+spec:
+  selector:
+    app: php-postgres
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

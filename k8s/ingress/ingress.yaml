@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gestion-produits-ingress
+  namespace: gestion-produits
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  tls:
+    - hosts:
+        - www.domaine.fr
+        - dev.domaine.fr
+      secretName: gestion-produits-tls
+  rules:
+    - host: www.domaine.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: php-mysql
+                port:
+                  number: 80
+    - host: dev.domaine.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: php-postgres
+                port:
+                  number: 80

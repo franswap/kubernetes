@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-postgres
+  namespace: gestion-produits
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: php-postgres
+  template:
+    metadata:
+      labels:
+        app: php-postgres
+    spec:
+      containers:
+        - name: php
+          image: wazer/gestion-produits
+          envFrom:
+          - configMapRef:
+              name: postgres-config
+          - secretRef:
+              name: postgres-secret
+          ports:
+            - containerPort: 80

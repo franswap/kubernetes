@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-mysql
+  namespace: gestion-produits
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: php-mysql
+  template:
+    metadata:
+      labels:
+        app: php-mysql
+    spec:
+      containers:
+        - name: php
+          image: wazer/gestion-produits
+          envFrom:
+          - configMapRef:
+              name: mysql-config
+          - secretRef:
+              name: mysql-secret
+          ports:
+            - containerPort: 80
