@@ -29,7 +29,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql = "SELECT * FROM produits ORDER BY PRO_lib ASC";
+                    $sql = "SELECT * FROM produits ORDER BY pro_lib ASC";
                     $res = $db->query($sql);
                     if ($res == false) {
                         echo "<tr><td colspan=\"3\">Aucun produit trouvé</td></tr>";

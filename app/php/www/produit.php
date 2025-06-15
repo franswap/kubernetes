@@ -7,7 +7,7 @@
     if (!isset($_GET['id']) or $_GET['id'] == '') {
         header('Location: home.php');
     } else {
-        $sql = "SELECT * FROM produits WHERE PRO_id = ?";
+        $sql = "SELECT * FROM produits WHERE pro_id = ?";
         $res = $db->prepare($sql);
         $res->bindParam(1, $_GET['id']);
         $res->execute();
@@ -19,7 +19,7 @@
             header('Location: home.php');
         } else {
             $produit = $res->fetch(PDO::FETCH_ASSOC);
-            $PRO_id = $produit['pro_id'];
+            $pro_id = $produit['pro_id'];
             $prix = number_format($produit['pro_prix'], 2, ',', ' ');
         }
     }
@@ -55,7 +55,7 @@
         
 
         <?php
-            $sql = "SELECT * FROM ressources WHERE PRO_id = ?";
+            $sql = "SELECT * FROM ressources WHERE pro_id = ?";
             $res = $db->prepare($sql);
             $res->bindParam(1, $_GET['id']);
             $res->execute();
@@ -85,7 +85,7 @@
         ?>
 
         <div class="form-group" style="margin-top: 20px;">
-                <button type="button" class="btn btn-warning" onClick="goto('form_produit.php?id=<?php echo $PRO_id ?>')">Modifier</button>
+                <button type="button" class="btn btn-warning" onClick="goto('form_produit.php?id=<?php echo $pro_id ?>')">Modifier</button>
                 <button type="button" class="btn btn-primary" onClick="goto('home.php')">Retour</button>
         </div>
 

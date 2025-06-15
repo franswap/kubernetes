@@ -6,11 +6,11 @@
 
     if (isset($_GET['id'])) {
         $action = "modification";
-        $PRO_id = $_GET['id'];
+        $pro_id = $_GET['id'];
 
-        $sql = "SELECT * FROM produits WHERE PRO_id = ?";
+        $sql = "SELECT * FROM produits WHERE pro_id = ?";
         $res = $db->prepare($sql);
-        $res->bindParam(1, $PRO_id);
+        $res->bindParam(1, $pro_id);
         $res->execute();
         if ($res === false) {
             header('Location: home.php');
@@ -48,7 +48,7 @@
             <?php
                 if ($action == 'modification') {
             ?>
-            <input type="hidden" id="pro_id" name="pro_id" value="<?php echo $PRO_id ?>" >
+            <input type="hidden" id="pro_id" name="pro_id" value="<?php echo $pro_id ?>" >
             <?php
                 }
             ?>
@@ -74,9 +74,9 @@
 
                 <?php
                     if ($action == 'modification') {
-                        $sql = "SELECT * FROM ressources WHERE PRO_id = ?";
+                        $sql = "SELECT * FROM ressources WHERE pro_id = ?";
                         $res = $db->prepare($sql);
-                        $res->bindParam(1, $PRO_id);
+                        $res->bindParam(1, $pro_id);
                         $res->execute();
                         if ($res != false) {
                             echo "<div>";
@@ -115,12 +115,12 @@
     <script>
         $('img.icon.trash').click(function() {
             if(confirm("Etes-vous sûr de vouloir supprimer cette photo?")) {
-                var RE_id = $(this).attr('data-id');
+                var re_id = $(this).attr('data-id');
                 
                 request = $.ajax({
                     method: "POST",
                     url: "validation.php",
-                    data: { action: 'supprimer_ressource', RE_id: RE_id }
+                    data: { action: 'supprimer_ressource', re_id: re_id }
                 }).done(function( msg ) {
                     if (msg == 'OK') {
                         document.location.reload();
@@ -136,12 +136,12 @@
         $('button.delete').click(function() {
             
             if(confirm("Etes-vous sûr de vouloir supprimer ce produit?")) {
-                var PRO_id = $('#PRO_id').val();
+                var pro_id = $('#pro_id').val();
 
                 request = $.ajax({
                     method: "POST",
                     url: "validation.php",
-                    data: { action: 'supprimer_produit', PRO_id: PRO_id }
+                    data: { action: 'supprimer_produit', pro_id: pro_id }
                 }).done(function( msg ) {
                     if (msg == 'OK') {
                         goto('home.php');
