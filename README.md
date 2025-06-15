@@ -1,21 +1,32 @@
 # GESTION PRODUITS
 
-## Prérequis
-Cette application est compatible `PHP8` et a été testée avec une base de données `MySQL 8.4`.
+## Déploiement avec Docker 
 
-## Installation
-- Copier les fichiers du dossier `www` dans un dossier accessible par le serveur Web.
-- Assurez vous que le dossier `uploads` est accessible en lecture et écriture par le serveur Web : `chmod 777 uploads`
-- Importez la base de données test à partir du dump SQL `database/gestion_produits.sql`.
-- Connectez vous à l'application avec l'url adaptée avec les informations suivantes :
+1. **Lancer la stack complète**
+`docker-compose up --build`
+
+## Déploiement avec Kubernetes k3d
+
+1. **Création du cluster**
+```bash
+k3d cluster create tp-k8s \
+  --port "443:443@loadbalancer" \
+  --agents 2
+```
+
+2. **Création du namespace**
+`kubectl apply -f k8s/`
+
+1. **Création des ressources**
+`kubectl apply -f k8s/ --recursive`
+
+1. **Ajouter dans le fichier hosts cette ligne pour rediriger les domaines vers localhost**
+```
+127.0.0.1     domaine.fr www.domaine.fr dev.domaine.fr
+```
+
+1. **Connexion à l'application :**
     - Login : `admin`
     - Mot de passe : `password`
-
-## Fonctionnalités
-L'application permet de :
-- Lister les produits
-- Afficher la fiche produit en lecture seule
-- Ajouter des produits
-- Modifier les produits
-- Supprimer les produits
-- Pour chaque produit, il est possible d'ajouter autant de photos que nécessaire
+    - URL Production (MySQL) : https://www.domaine.fr
+    - URL Développement (PostgreSQL) : https://dev.domaine.fr
